@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .slideshow-container {
+    position: relative;
+    max-width: 100%;
+    overflow: hidden;
+    margin: auto;
+  }
+  .slide {
+    display: none;
+    width: 800px;
+    height:90vh;
+    /* height: auto; */
+  }
+  .controls {
+    text-align: center;
+  }
+</style>
+    </style>
+    <title>Slide show</title>
+</head>
+
+    
+<body>
+    <div class="slideshow-container">
+        <div class="slide">
+          <img src="https://th.bing.com/th/id/R.d0f063f0e864dc24e06afccb61542921?rik=3wwQ64vB8oV7fg&riu=http%3a%2f%2fs1.picswalls.com%2fwallpapers%2f2014%2f01%2f27%2fcomputer-desktop-wallpaper_092810358_20.jpg&ehk=Zymcyce8yexWi04U6NXi0kRziIyfNA08e73A6jaHrUQ%3d&risl=&pid=ImgRaw&r=0" alt="Slide 1">
+        </div>
+        <div class="slide">
+          <img src="https://i.pinimg.com/originals/43/dd/fe/43ddfe8b211a09f95d999c432d1bed98.jpg" alt="Slide 2">
+        </div>
+        <div class="slide">
+          <img src="https://th.bing.com/th/id/R.ed7b600e88172dde6dd3dd5702a64dc8?rik=166cP8nJUvJd8Q&riu=http%3a%2f%2fstarsunfolded.com%2fwp-content%2fuploads%2f2014%2f01%2fEmraan-Hashmi-22-compressed.jpg&ehk=T%2bNL6QCAdIe%2fPH74VrKiU3%2bpqHOhWFMGuvM%2bjA7Z2uI%3d&risl=&pid=ImgRaw&r=0" alt="Slide 3">
+        </div>
+        <div class="slide">
+            <img src="https://th.bing.com/th/id/R.d0f063f0e864dc24e06afccb61542921?rik=3wwQ64vB8oV7fg&riu=http%3a%2f%2fs1.picswalls.com%2fwallpapers%2f2014%2f01%2f27%2fcomputer-desktop-wallpaper_092810358_20.jpg&ehk=Zymcyce8yexWi04U6NXi0kRziIyfNA08e73A6jaHrUQ%3d&risl=&pid=ImgRaw&r=0" alt="Slide 1">
+          </div>
+          <div class="slide">
+            <img src="https://i.pinimg.com/originals/43/dd/fe/43ddfe8b211a09f95d999c432d1bed98.jpg" alt="Slide 2">
+          </div>
+          <div class="slide">
+            <img src="https://th.bing.com/th/id/R.ed7b600e88172dde6dd3dd5702a64dc8?rik=166cP8nJUvJd8Q&riu=http%3a%2f%2fstarsunfolded.com%2fwp-content%2fuploads%2f2014%2f01%2fEmraan-Hashmi-22-compressed.jpg&ehk=T%2bNL6QCAdIe%2fPH74VrKiU3%2bpqHOhWFMGuvM%2bjA7Z2uI%3d&risl=&pid=ImgRaw&r=0" alt="Slide 3">
+          </div>
+          <div class="slide">
+            <img src="https://th.bing.com/th/id/R.d0f063f0e864dc24e06afccb61542921?rik=3wwQ64vB8oV7fg&riu=http%3a%2f%2fs1.picswalls.com%2fwallpapers%2f2014%2f01%2f27%2fcomputer-desktop-wallpaper_092810358_20.jpg&ehk=Zymcyce8yexWi04U6NXi0kRziIyfNA08e73A6jaHrUQ%3d&risl=&pid=ImgRaw&r=0" alt="Slide 1">
+          </div>
+          <div class="slide">
+            <img src="https://i.pinimg.com/originals/43/dd/fe/43ddfe8b211a09f95d999c432d1bed98.jpg" alt="Slide 2">
+          </div>
+          <div class="slide">
+            <img src="https://th.bing.com/th/id/R.ed7b600e88172dde6dd3dd5702a64dc8?rik=166cP8nJUvJd8Q&riu=http%3a%2f%2fstarsunfolded.com%2fwp-content%2fuploads%2f2014%2f01%2fEmraan-Hashmi-22-compressed.jpg&ehk=T%2bNL6QCAdIe%2fPH74VrKiU3%2bpqHOhWFMGuvM%2bjA7Z2uI%3d&risl=&pid=ImgRaw&r=0" alt="Slide 3">
+          </div>
+      </div>
+      <div class="controls">
+        <button id="startStopBtn">Start Slideshow</button>
+        <button id="prevBtn">Previous</button>
+        <button id="nextBtn">Next</button>
+      </div>
+    
+    <script>
+       let slideshowInterval;
+       let currentSlideIndex = 0;
+       let isSlideshowRunning = false;
+
+       const slides = document.querySelectorAll('.slide');
+       const startStopBtn = document.getElementById('startStopBtn');
+       const prevBtn = document.getElementById('prevBtn');
+       const nextBtn = document.getElementById('nextBtn');
+
+       function startStopSlideShow() {
+        if(!isSlideshowRunning){
+            isSlideshowRunning= true;
+            startStopBtn.textContent = 'stop slideshow';
+            slideshowInterval = setInterval(nextSlide,2000) 
+        }else{
+            stopSlideShow()
+        }
+      }
+      function stopSlideShow(){
+        clearInterval(slideshowInterval);
+        isSlideshowRunning = false;
+        startStopBtn.textContent = 'start slideshow';
+      }
+      function nextSlide(){
+        currentSlideIndex = (currentSlideIndex + 1) % slides.length;
+        showSlide();
+        
+      }
+      function previousSlide(){
+          currentSlideIndex--;
+          if(currentSlideIndex<0){
+              currentSlideIndex = slides.length - 1;
+          }
+          showSlide();
+      }
+      function showSlide(){
+          for(let i=0;i<slides.length;i++){
+              slides[i].style.display='none';
+          }
+          slides[currentSlideIndex].style.display='block'
+      }
+      //add event listeners to buttons
+      startStopBtn.addEventListener('click',startStopSlideShow);
+      nextBtn.addEventListener('click',nextSlide);
+      prevBtn.addEventListener('click',previousSlide);
+
+      
+    </script>
+</body>
+</html>
